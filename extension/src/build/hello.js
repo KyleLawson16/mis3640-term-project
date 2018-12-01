@@ -1,11 +1,19 @@
 /* This file was auto-generated using RapydScript */
 (function(){
-doHelloMessage = function() {
-  alert("hello");
+createWaldo = function() {
+  var div;
+  div = $("<div></div>");
+  div.css("background", "green");
+  div.css("width", "50px");
+  div.css("height", "50px");
+  return div[0];
 };
 
-doHelloMessage();
-document.getElementById("result").innerHTML = "Compiled Python script in Chrome";
-console.log("hello from python");
+waldo = createWaldo().outerHTML;
+populateWaldo = function(waldo) {
+  console.log(window.document);
+};
+
+populateWaldo(waldo);
 
 }());
