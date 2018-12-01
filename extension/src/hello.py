@@ -2,7 +2,7 @@
 # (for rapydscript, a python to javascript compiler)
 
 def doHelloMessage():
-   alert('hello')
+   alert('goodbye')
 doHelloMessage()
 
 # modify html page
