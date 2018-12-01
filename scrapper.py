@@ -2,12 +2,13 @@ import cv2
 import numpy as np
 import urllib.request
 
+url_list = []
 
 for i in range(1, 802):
     try:
         url = 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/'+ \
             '{:03d}'.format(i) +'.png'
-        
+        url_list.append(url)
         request = urllib.request.Request(url)
         response = urllib.request.urlopen(request)
         binary_str = response.read()
@@ -21,3 +22,7 @@ for i in range(1, 802):
 
 print("Done")
 
+
+with open('image_urls.txt', 'w') as f:
+    for item in url_list:
+        f.write("%s\n" % item)

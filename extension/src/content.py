@@ -23,7 +23,7 @@ def createPerson(size, isWaldo=False):
         person.onclick = def(event):
             foundWaldo()
     else:
-        person.style.background = 'red'
+        person.style.backgroundImage = 'url("../images/001.png")'
     return person
 
 def populateFakes(amt):

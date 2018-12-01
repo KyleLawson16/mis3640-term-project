@@ -30,7 +30,7 @@ createPerson = function(size, isWaldo) {
       foundWaldo();
     });
   } else {
-    person.style.background = "red";
+    person.style.backgroundImage = "url(\"001.png\")";
   }
 
   return person;
