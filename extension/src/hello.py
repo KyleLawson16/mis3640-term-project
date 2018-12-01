@@ -1,13 +1,17 @@
-# Example Python script
-# (for rapydscript, a python to javascript compiler)
+def createWaldo():
+    div = $('<div></div>')
+    div.css('background', 'green')
+    div.css('width', '50px')
+    div.css('height', '50px')
+    return div[0]
 
-def doHelloMessage():
-   alert('hello')
-doHelloMessage()
+waldo = createWaldo().outerHTML
 
-# modify html page
-document.getElementById("result").innerHTML = 'Compiled Python script in Chrome'
+def populateWaldo(waldo):
+    console.log(window.document)
 
 
-# write into log
-console.log('hello from python')
+populateWaldo(waldo)
+
+
+# document.getElementById("result").innerHTML =
