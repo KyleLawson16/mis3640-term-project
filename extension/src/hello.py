@@ -5,8 +5,6 @@ def createWaldo():
     div.css('height', '50px')
     return div[0]
 
-waldo = createWaldo().outerHTML
-
 def populateWaldo(waldo):
     console.log(window.document)
 
