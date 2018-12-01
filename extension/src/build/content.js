@@ -1,22 +1,33 @@
 /* This file was auto-generated using RapydScript */
 (function(){
-getSiteHeight = function() {
-  return window.innerHeight;
+get_site_height = function() {
+  return (window.innerHeight - photoSize);
 };
 
-getSiteWidth = function() {
-  return window.innerWidth;
+get_site_width = function() {
+  return (window.innerWidth - photoSize);
 };
 
-foundWaldo = function() {
+get_photo_number = function(index) {
+  if ((index < 9)) {
+    return ("00" + (index + 1));
+  } else if ((index < 99)) {
+    return ("0" + (index + 1));
+  } else {
+    return (index + 1);
+  }
+
+};
+
+found_waldo = function() {
   alert("found waldo");
 };
 
-createPerson = function(size, isWaldo) {
-  var left, person, top;
+create_person = function(size, index, isWaldo) {
+  var left, person, photoNumber, top;
   if (typeof isWaldo === "undefined") {isWaldo = false};
-  top = (Math.random() * getSiteHeight());
-  left = (Math.random() * getSiteWidth());
+  top = (Math.random() * get_site_height());
+  left = (Math.random() * get_site_width());
   person = document.createElement("DIV");
   person.style.width = (size + "px");
   person.style.height = (size + "px");
@@ -25,29 +36,32 @@ createPerson = function(size, isWaldo) {
   person.style.left = (left + "px");
   person.style.zIndex = "9999";
   if (isWaldo) {
-    person.style.background = "green";
+    person.style.backgroundImage = "url(\"https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00\")";
     person.onclick = (function(event) {
-      foundWaldo();
+      found_waldo();
     });
   } else {
-    person.style.backgroundImage = "url(\"001.png\")";
+    photoNumber = get_photo_number(index);
+    person.style.backgroundImage = (("url(\"https://assets.pokemon.com/assets/cms2/img/pokedex/detail/" + photoNumber) + ".png\")");
+    person.style.backgroundSize = "cover";
   }
 
   return person;
 };
 
-populateFakes = function(amt) {
+populate_fakes = function(amt) {
   var fake, fakeContainer, i;
   fakeContainer = document.createElement("DIV");
   for (i = 0; i < amt; i++) {
-    fake = createPerson(10);
+    fake = create_person(photoSize, i);
     fakeContainer.appendChild(fake);
   }
 
   return fakeContainer;
 };
 
-document.body.appendChild(createPerson(10, true));
-document.body.appendChild(populateFakes(300));
+photoSize = 40;
+document.body.appendChild(create_person(photoSize, 1, true));
+document.body.appendChild(populate_fakes(200));
 
 }());
