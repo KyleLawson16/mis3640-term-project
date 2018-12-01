@@ -9,7 +9,6 @@ createWaldo = function() {
   return div[0];
 };
 
-waldo = createWaldo().outerHTML;
 populateWaldo = function(waldo) {
   console.log(window.document);
 };
