@@ -1,11 +1,24 @@
 /* This file was auto-generated using RapydScript */
 (function(){
+get_response = function(response) {
+  console.log(response);
+};
+
+send_message = function(type, message) {
+  chrome.runtime.sendMessage({
+    type: type,
+    message: message
+  }, (function(response) {
+    get_response(response);
+  }));
+};
+
 get_site_height = function() {
-  return (window.innerHeight - photoSize);
+  return (window.innerHeight - photo_size);
 };
 
 get_site_width = function() {
-  return (window.innerWidth - photoSize);
+  return (window.innerWidth - photo_size);
 };
 
 get_photo_number = function(index) {
@@ -20,12 +33,12 @@ get_photo_number = function(index) {
 };
 
 found_waldo = function() {
-  alert("found waldo");
+  send_message("winner", "You found Professor Li!");
 };
 
-create_person = function(size, index, isWaldo) {
-  var left, person, photoNumber, top;
-  if (typeof isWaldo === "undefined") {isWaldo = false};
+create_person = function(size, index, is_waldo) {
+  var left, person, photo_number, top;
+  if (typeof is_waldo === "undefined") {is_waldo = false};
   top = (Math.random() * get_site_height());
   left = (Math.random() * get_site_width());
   person = document.createElement("DIV");
@@ -35,33 +48,76 @@ create_person = function(size, index, isWaldo) {
   person.style.top = (top + "px");
   person.style.left = (left + "px");
   person.style.zIndex = "9999";
-  if (isWaldo) {
-    person.style.backgroundImage = "url(\"https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00\")";
+  person.style.backgroundSize = "cover";
+  if (is_waldo) {
+    person.id = "waldo";
+    person.style.backgroundImage = "url(\"https://s3.amazonaws.com/mis3640/lizhinobackground.png\")";
     person.onclick = (function(event) {
       found_waldo();
     });
   } else {
-    photoNumber = get_photo_number(index);
-    person.style.backgroundImage = (("url(\"https://assets.pokemon.com/assets/cms2/img/pokedex/detail/" + photoNumber) + ".png\")");
-    person.style.backgroundSize = "cover";
+    photo_number = get_photo_number(index);
+    person.style.backgroundImage = (("url(\"https://assets.pokemon.com/assets/cms2/img/pokedex/detail/" + photo_number) + ".png\")");
   }
 
   return person;
 };
 
 populate_fakes = function(amt) {
-  var fake, fakeContainer, i;
-  fakeContainer = document.createElement("DIV");
+  var fake, fake_container, i;
+  fake_container = document.createElement("DIV");
   for (i = 0; i < amt; i++) {
-    fake = create_person(photoSize, i);
-    fakeContainer.appendChild(fake);
+    fake = create_person(photo_size, i);
+    fake_container.appendChild(fake);
+    fake_container.id = "fake-container";
   }
 
-  return fakeContainer;
+  return fake_container;
 };
 
-photoSize = 40;
-document.body.appendChild(create_person(photoSize, 1, true));
-document.body.appendChild(populate_fakes(200));
+photo_size = 50;
+number_of_fakes = 100;
+chrome.runtime.onMessage.addListener((function(request, sender, sendResponse) {
+  var fake_container, waldo;
+  if ((request.type == "start")) {
+    sendResponse({
+      message: "started"
+    });
+    document.body.appendChild(create_person(photo_size, 1, true));
+    document.body.appendChild(populate_fakes(number_of_fakes));
+  }
+
+  if ((request.type == "pause")) {
+    sendResponse({
+      message: "paused"
+    });
+    waldo = document.getElementById("waldo");
+    fake_container = document.getElementById("fake-container");
+    waldo.style.display = "none";
+    fake_container.style.display = "none";
+  }
+
+  if ((request.type == "continue")) {
+    sendResponse({
+      message: "continue"
+    });
+    waldo = document.getElementById("waldo");
+    fake_container = document.getElementById("fake-container");
+    waldo.style.display = "block";
+    fake_container.style.display = "block";
+  }
+
+  if ((request.type == "winner")) {
+    sendResponse({
+      message: "winner"
+    });
+    waldo = document.getElementById("waldo");
+    fake_container = document.getElementById("fake-container");
+    document.body.removeChild(waldo);
+    document.body.removeChild(fake_container);
+    alert(request.message);
+  }
+
+}));
 
 }());

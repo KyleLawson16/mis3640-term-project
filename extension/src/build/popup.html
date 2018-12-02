@@ -11,27 +11,28 @@
       body {
         font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
         font-size: 100%;
+        width: 150px;
+        height: 100%;
       }
-      #status {
-        /* avoid an excessively wide status text */
-        white-space: pre;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        max-width: 400px;
+      #start-btn {
+        width: 100%;
+        padding: 10px 0;
+        background-color: rgb(49,163,227);
+        color: white;
+        border-radius: 5px;
+        border: none;
+      }
+      #timer {
+        color: black;
       }
     </style>
-
-    <!--
-      - JavaScript and HTML must be in separate files: see our Content Security
-      - Policy documentation[1] for details and explanation.
-      -
-      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
-     -->
-
   <script src="jquery.min.js"></script>
   </head>
   <body>
-    <div id="result"></div>
-  <script type="text/javascript" src="hello.js"></script>
+    <div id="result">
+      <button id="start-btn">Start Game</button>
+      <h1 id="timer"></h1>
+    </div>
+  <script type="text/javascript" src="background.js"></script>
   </body>
 </html>
