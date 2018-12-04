@@ -1,7 +1,10 @@
 /* This file was auto-generated using RapydScript */
 (function(){
 get_response = function(response) {
-  console.log(response);
+  if ((response.message == "started")) {
+    window.close();
+  }
+
 };
 
 send_message = function(type, message) {
@@ -18,71 +21,18 @@ send_message = function(type, message) {
   }));
 };
 
-start_timer = function() {
-  tick();
-};
-
-timer = null;
-paused = false;
-started = false;
-clicked = false;
-current_time = 0;
-tick = function() {
-  var new_tick;
-  
-  
-  
-  clearTimeout(timer);
-  if ((paused == false)) {
-    current_time += 0.02;
-    timer = document.getElementById("timer");
-    timer.innerText = parseFloat(current_time).toFixed(2);
-    new_tick = (function() {
-      tick(current_time);
-    });
-    timer = setTimeout(new_tick, 20);
-  }
-
-};
-
 start_btn = document.getElementById("start-btn");
 start_btn.onclick = (function(event) {
-  
-  
-  
-  
-  if ((!clicked)) {
-    if ((!started)) {
-      started = true;
-      send_message("start", "start button clicked");
-    } else {
-      send_message("continue", "continue button clicked");
-    }
-
-    paused = false;
-    clicked = true;
-    start_btn.innerText = "Stop";
-    start_timer();
-  } else {
-    send_message("pause", "pause button clicked");
-    paused = true;
-    clicked = false;
-    start_btn.innerText = "Continue";
-    clearTimeout(timer);
-  }
-
+  var params, photo_count, photo_size, waldo_url;
+  photo_size = document.getElementById("photo-size").value;
+  photo_count = document.getElementById("photo-count").value;
+  waldo_url = document.getElementById("waldo-url").value;
+  params = {
+    "photo_size": photo_size,
+    "photo_count": photo_count,
+    "waldo_url": waldo_url
+  };
+  send_message("start", params);
 });
-chrome.runtime.onMessage.addListener((function(request, sender, sendResponse) {
-  
-  
-  console.log(request);
-  if ((request.type == "winner")) {
-    send_message("winner", (("You found Professor Li in " + parseFloat(current_time).toFixed(2)) + " seconds!"));
-    paused = true;
-    start_btn.style.display = "none";
-    clearTimeout(timer);
-  }
-
-}));
 
 }());
