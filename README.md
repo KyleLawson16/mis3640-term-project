@@ -4,8 +4,7 @@
 
 ### Team Members - Defne Ikiz, Shirley Zong, Kyle Lawson
 
-[Project Website](https://sites.google.com/babson.edu/zhao/home)
-[Demo Video](https://www.youtube.com/watch?v=SqgVH829sK4)
+[Project Website](https://sites.google.com/babson.edu/zhao/home), [Demo Video](https://www.youtube.com/watch?v=SqgVH829sK4)
 
 ### Setup & Installation
 
@@ -28,9 +27,9 @@ Navigate to the src directory and build the extension
 ./make.sh
 ```
 
-Navigate to your extensions dashboard in chrome. Ensure that you are in developer mode and select the option to "Load Unpacked". Select the entire build folder and try running the extension in your browser.
+Navigate to your [extensions dashboard](chrome://extensions/) in chrome. Ensure that you are in developer mode and select the option to "Load Unpacked". Select the entire build folder and try running the extension in your browser.
 
- 
+
 
 
 <!-- - [The Big Idea](#Idea)
