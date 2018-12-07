@@ -148,7 +148,7 @@ def timer_btn_click():
     nonlocal finished
     timer_btn = document.getElementById('waldo-timer-btn')
     timer_text = document.getElementById('waldo-timer-text')
-    if finished == True:
+    if finished:
         finished = False
         paused = False
         timer_btn.innerText = 'Pause'
@@ -158,7 +158,7 @@ def timer_btn_click():
         document.body.removeChild(waldo)
         start_timer(True)
 
-    elif paused == True:
+    elif paused:
         paused = False
         timer_btn.innerText = 'Pause'
         tick()
@@ -230,11 +230,11 @@ def create_fakes(amt):
     nonlocal photo_size
     # Create a container to store them in
     fake_container = document.createElement('DIV')
+    fake_container.id = 'fake-container'
     for i in range(amt):
         # Create each img and store it in container
         fake = create_img(photo_size, i)
         fake_container.appendChild(fake)
-        fake_container.id = 'fake-container'
     return fake_container
 
 def create_and_append_images(photo_size, photo_count, waldo_url):

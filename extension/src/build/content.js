@@ -124,7 +124,7 @@ timer_btn_click = function() {
   
   timer_btn = document.getElementById("waldo-timer-btn");
   timer_text = document.getElementById("waldo-timer-text");
-  if ((finished == true)) {
+  if (finished) {
     finished = false;
     paused = false;
     timer_btn.innerText = "Pause";
@@ -132,7 +132,7 @@ timer_btn_click = function() {
     waldo = document.getElementById("waldo");
     document.body.removeChild(waldo);
     start_timer(true);
-  } else if ((paused == true)) {
+  } else if (paused) {
     paused = false;
     timer_btn.innerText = "Pause";
     tick();
@@ -190,10 +190,10 @@ create_fakes = function(amt) {
   var fake, fake_container, i;
   
   fake_container = document.createElement("DIV");
+  fake_container.id = "fake-container";
   for (i = 0; i < amt; i++) {
     fake = create_img(photo_size, i);
     fake_container.appendChild(fake);
-    fake_container.id = "fake-container";
   }
 
   return fake_container;
