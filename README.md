@@ -1,12 +1,41 @@
-# Term Project
+# Zhao
 
-### MIS3640 - Problem Solving & Software Design
+### MIS3640 - Problem Solving & Software Design Final Project
 
 ### Team Members - Defne Ikiz, Shirley Zong, Kyle Lawson
 
+[Project Website](https://sites.google.com/babson.edu/zhao/home)
+[Demo Video](https://www.youtube.com/watch?v=SqgVH829sK4)
+
+### Setup & Installation
+
+Clone the repo:
+
+```
+git clone https://github.com/KyleLawson16/mis3640-term-project.git
+```
+
+Install RapydScript
+
+```
+npm install rapydscript -g
+```
+for more info see [RapydScript](https://github.com/atsepkov/RapydScript)
+
+Navigate to the src directory and build the extension
+
+```
+./make.sh
+```
+
+Navigate to your extensions dashboard in chrome. Ensure that you are in developer mode and select the option to "Load Unpacked". Select the entire build folder and try running the extension in your browser.
+
+ 
+
+
+<!-- - [The Big Idea](#Idea)
 ## Table of Contents:
 
-- [The Big Idea](#Idea)
 - [Learning Goals](#Goals)
 - [Implementation Plan](#Implementation)
 - [Project Schedule](#Schedule)
@@ -89,4 +118,4 @@ Our biggest risk is that LinkedIn’s bots will be very intelligent and will mak
 - Web scraping
 - Use of API’s
 - Basic JavaScript for interface creation
-- How to set up a Flask application
+- How to set up a Flask application -->
